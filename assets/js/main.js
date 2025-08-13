@@ -1,4 +1,3 @@
-
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
@@ -28,22 +27,21 @@ function addBoundaries() {
 
     World.add(engine.world, [
         Bodies.rectangle(width / 2, -thickness / 2, width, thickness, {
-            isStatic: true
+            isStatic: true,
         }),
         Bodies.rectangle(width / 2, height + thickness / 2, width, thickness, {
-            isStatic: true
+            isStatic: true,
         }),
         Bodies.rectangle(-thickness / 2, height / 2, thickness, height, {
-            isStatic: true
+            isStatic: true,
         }),
         Bodies.rectangle(width + thickness / 2, height / 2, thickness, height, {
-            isStatic: true
+            isStatic: true,
         }),
     ]);
 }
 
 function draw() {
-    background("black");
     Engine.update(engine);
 
     items.forEach((item) => item.update());
@@ -55,7 +53,7 @@ class Item {
             frictionAir: 0.075,
             restitution: 0.25,
             density: 0.002,
-            angle: Math.random() * Math.PI * 2
+            angle: Math.random() * Math.PI * 2,
         };
 
         this.body = Bodies.rectangle(x, y, 100, 200, options);
@@ -79,7 +77,6 @@ class Item {
     }
 }
 
-
 function mouseMoved() {
     if (dist(mouseX, mouseY, lastMouseX, lastMouseY) > 10) {
         lastMouseX = mouseX;
@@ -88,27 +85,18 @@ function mouseMoved() {
         items.forEach((item) => {
             if (dist(mouseX, mouseY, item.body.position.x, item.body.position.y) < 150) {
                 let forceMagnitude = 3;
-                Body.applyForce(item.body, {
-                    x: item.body.position.x,
-                    y: item.body.position.y
-                }, {
-                    x: random(-forceMagnitude, forceMagnitude),
-                    y: random(-forceMagnitude, forceMagnitude)
-                });
+                Body.applyForce(
+                    item.body,
+                    {
+                        x: item.body.position.x,
+                        y: item.body.position.y,
+                    },
+                    {
+                        x: random(-forceMagnitude, forceMagnitude),
+                        y: random(-forceMagnitude, forceMagnitude),
+                    }
+                );
             }
         });
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
